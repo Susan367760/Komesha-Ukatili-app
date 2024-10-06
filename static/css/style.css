@@ -1,0 +1,92 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFD700; /* Yellow background */
+    color: #000000; /* Black text */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Align items to space them */
+    padding: 20px;
+}
+
+.left-content {
+    flex: 1; /* Take full height */
+    display: flex;
+    align-items: center; /* Center logo vertically */
+    justify-content: center; /* Center logo horizontally */
+}
+
+.logo {
+    max-width: 200px; /* Make the logo bigger */
+    height: auto;
+}
+
+.right-content {
+    flex: 2; /* Take more width than the logo */
+    padding: 20px; /* Add some padding */
+}
+
+.header {
+    text-align: left; /* Align text to the left */
+}
+
+h1 {
+    color: #FF0000; /* Red for header */
+    font-size: 28px; /* Smaller size */
+    font-weight: bold;
+}
+
+h2 {
+    color: #000000; /* Black text */
+    font-size: 20px; /* Smaller size */
+}
+
+h3 {
+    color: #FF0000; /* Red for headers */
+    font-size: 18px; /* Smaller size */
+}
+
+p {
+    font-size: 14px; /* Smaller size */
+    color: #000;
+    text-align: left; /* Align text to the left */
+}
+
+.media-upload {
+    margin: 20px 0;
+}
+
+textarea, input[type="file"] {
+    width: 100%; /* Full width for better alignment */
+    padding: 10px;
+    font-size: 14px;
+}
+
+.btn {
+    background-color: #000000; /* Black button */
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #FF0000; /* Red hover effect */
+}
+
+footer {
+    background-color: #000000; /* Black footer */
+    color: #FFFFFF; /* White text in footer */
+    text-align: center;
+    padding: 10px; /* Add padding for better appearance */
+}
+
+#mapid {
+    height: 400px; /* Height of the map */
+    margin-top: 20px; /* Space between content and map */
+}

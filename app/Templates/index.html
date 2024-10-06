@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komesha Ukatili</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="left-content">
+            <img src="{% static 'images/logo.png' %}" alt="Komesha Ukatili Logo" class="logo">
+        </div>
+        <div class="right-content">
+            <div class="header">
+                <h1>KOMESHA UKATILI</h1>
+                <h2>Click, Click, Upload - Report Police Brutality and Abductions</h2>
+            </div>
+            <div class="content">
+                <p>Take photos, record videos, and go live to report incidents of brutality. Pin the exact location on the map to help others.</p>
+                <div class="media-upload">
+                    <h3>Report an Incident</h3>
+                    <form action="/submit_report/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label for="photo">Upload Photo/Video:</label><br>
+                        <input type="file" name="media" accept="image/*,video/*" capture="camera"><br><br>
+                        <label for="description">Incident Description:</label><br>
+                        <textarea name="description" rows="4" cols="50"></textarea><br><br>
+                        <button type="submit" class="btn">Submit Report</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mapid"></div>
+    <footer>
+        <p>&copy; 2024 Komesha Ukatili. All Rights Reserved.</p>
+    </footer>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('mapid').setView([-1.286389, 36.817223], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        fetch("{% static 'kenya_counties.geojson' %}")
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: function (feature) {
+                        return {
+                            color: "#FF0000",
+                            weight: 2,
+                            fillOpacity: 0.3
+                        };
+                    },
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup(feature.properties.name);
+                    }
+                }).addTo(map);
+            })
+            .catch(err => console.log('Error loading GeoJSON: ', err));
+        L.marker([-1.286389, 36.817223]).addTo(map)
+            .bindPopup('Report Location')
+            .openPopup();
+    </script>
+</body>
+</html>
